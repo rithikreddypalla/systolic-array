@@ -1,20 +1,14 @@
-// ============================================================
-// Processing Element (PE)
-//   - a flows right  : a_in → registered → a_out
-//   - b flows down   : b_in → registered → b_out
-//   - a_new_data travels with A (horizontal)
-//   - b_new_data travels with B (vertical)
-//   - c_buffer latches c when EITHER signal arrives
-//     (they should arrive simultaneously at each PE
-//      when skew is set up correctly)
-// ============================================================
+// ------------------------------------------------------------
+// pe.v
+// Processing Element
+// ------------------------------------------------------------
 module pe(
     input  wire        clk,
     input  wire        rst,
     input  wire [7:0]  a_in,
     input  wire [7:0]  b_in,
-    input  wire        a_new_data_in,   // travels with A (left→right)
-    input  wire        b_new_data_in,   // travels with B (top→down)
+    input  wire        a_new_data_in,
+    input  wire        b_new_data_in,
     output wire [31:0] c,
     output reg  [7:0]  a_out,
     output reg  [7:0]  b_out,
@@ -22,10 +16,10 @@ module pe(
     output reg         b_new_data_out
 );
     mac mac_inst(
-        .clk   (clk),
-        .rst   (rst),
-        .a     (a_in),
-        .b     (b_in),
+        .clk(clk),
+        .rst(rst),
+        .a(a_in),
+        .b(b_in),
         .result(c)
     );
 
